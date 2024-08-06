@@ -1,0 +1,86 @@
+{% extends 'genre/navigation.html' %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block content %}
+<style>
+    .cart-container {
+        margin: 20px auto;
+        max-width: 800px;
+    }
+    .cart-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+    .cart-item img {
+        max-width: 100px;
+        max-height: 150px;
+        margin-right: 20px;
+    }
+    .cart-details {
+        flex: 1;
+    }
+    .cart-details h5 {
+        margin: 0;
+    }
+    .cart-details p {
+        margin: 5px 0;
+    }
+    .cart-quantity {
+        display: flex;
+        align-items: center;
+    }
+    .cart-quantity input {
+        width: 60px;
+        text-align: center;
+        margin-right: 10px;
+    }
+    .cart-total {
+        text-align: right;
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+    .checkout-btn {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 1.1em;
+        cursor: pointer;
+    }
+    .checkout-btn:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<div class="cart-container">
+    <h1 class="text-center">Shopping Cart</h1>
+    {% for item in cart_items %}
+    <div class="cart-item">
+        <img src="{{ item.piece.piececover }}" alt="{{ item.piece.title }}">
+        <div class="cart-details">
+            <h5>{{ item.piece.title }}</h5>
+            <p>By {{ item.piece.artist }}</p>
+            <p>₹{{ item.piece.price }}</p>
+        </div>
+        <div class="cart-quantity">
+            <input type="number" name="quantity" value="{{ item.quantity }}" min="1" data-piece-id="{{ item.piece.id }}">
+            <button class="btn btn-danger btn-sm remove-btn" data-piece-id="{{ item.piece.id }}">Remove</button>
+        </div>
+        <p class="item-total">₹{{ item.piece.price|multiply:item.quantity }}</p>
+    </div>
+    {% endfor %}
+    <div class="cart-total">
+        Total: ₹{{ cart_total }}
+    </div>
+    <button class="checkout-btn">Proceed to Checkout</button>
+</div>
+{% endblock %}

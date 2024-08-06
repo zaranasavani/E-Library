@@ -1,0 +1,147 @@
+{% extends 'genre/navigation.html' %}
+
+{% block title %}Genre{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+    }
+    .hero-banner {
+        position: relative;
+        background-image: url('https://iguana-idm.com/wp-content/uploads/iGuana-Digital-Library-e-Library-Internet-Library-Online-Library-Solution.jpg');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        height: 600px; /* Increased height */
+        text-align: center;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+        overflow: hidden;
+    }
+    .hero-banner::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Overlay */
+        z-index: -2;
+    }
+    .hero-banner h1 {
+        font-size: 3em;
+        margin: 0;
+    }
+    .hero-banner p {
+        font-size: 1.5em;
+    }
+    .hero-banner .description {
+        font-size: 1.2em;
+        margin-top: 10px;
+    }
+    .hero-banner .quote {
+        font-style: italic;
+        margin-top: 20px;
+        font-size: 1.1em;
+    }
+    h2 {
+        text-align: center;
+        color: #4CAF50;
+        margin-top: 30px;
+    }
+    .genre-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .genre-card {
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 10px;
+        width: 400px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+    }
+    .genre-card:hover {
+        transform: scale(1.05);
+        border-color: #4CAF50;
+    }
+    .genre-card img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+    .genre-card h3 {
+        font-size: 1.5em;
+        margin: 10px 0;
+    }
+    .genre-card a {
+        text-decoration: none;
+        color: #4CAF50;
+    }
+    .genre-card a:hover {
+        text-decoration: underline;
+    }
+    .genre-card p {
+        font-size: 1.1em;
+        color: #777;
+    }
+    .footer {
+        background-color: #333;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        margin-top: 30px;
+        border-radius: 10px;
+    }
+    .footer a {
+        color: #4CAF50;
+        text-decoration: none;
+    }
+    .footer a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="hero-banner">
+    <h1>Welcome to E-Library</h1>
+    <p>Your gateway to a world of books and knowledge</p>
+    <div class="description">
+        Discover a diverse collection of genres that cater to every reader’s taste. From timeless classics to contemporary masterpieces, our library offers an extensive selection for you to explore. Dive into a sea of stories and let your imagination soar.
+    </div>
+    <div class="quote">
+        "A room without books is like a body without a soul." - Marcus Tullius Cicero
+    </div>
+</div>
+
+<h2>Featured Genres</h2>
+<div class="genre-container">
+    {% for genreobj in object_list %}
+        <div class="genre-card">
+            <img src="{{ genreobj.colcover }}" alt="{{ genreobj.collection_name }}">
+            <div class="content">
+                <h3><a href="{% url 'details' genreobj.id %}">{{ genreobj.collection_name }}</a></h3>
+                <p>{{ genreobj.description }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 E-Library. All rights reserved.</p>
+    <p><a href="/aboutus">About Us</a> | <a href="/contact">Contact</a> | <a href="/privacy">Privacy Policy</a></p>
+</div>
+{% endblock %}
