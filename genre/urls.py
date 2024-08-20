@@ -14,7 +14,7 @@ urlpatterns = [
 
     path('piece/<int:pk>/', views.piece_detail.as_view(), name='piece_detail'),
 
-    path('',views.cart.as_view(),name="cart"),
+    # path('',views.cart.as_view(),name="cart"),
 
     # path('userreg/',views.userreg.as_view(),name="userreg"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
