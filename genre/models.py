@@ -1,6 +1,8 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser
+from django.core.validators import RegexValidator
 # Create your models(tables to store data come from user) here.
+
 
 class Collection(models.Model):
     collection_name = models.CharField(max_length=100)
