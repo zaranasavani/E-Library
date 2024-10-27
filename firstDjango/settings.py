@@ -39,7 +39,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap4',
-    'genre',
     # 'genre.apps.GenreConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'genre',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

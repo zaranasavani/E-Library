@@ -4,14 +4,42 @@ from django.contrib import messages
 from .models import Collection,Piece
 from django.views import generic
 from django.contrib.auth import login
-
+from .forms import RegistrationForm
 
 
 # Create your views here.
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
+def register(request):
+    if request.method == "POST":
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            # Save the form data to the database
+            form.save()
+            return redirect('login')  # Redirect to a success page
+    else:
+        form = RegistrationForm()
+    return render(request, 'genre/register.html', {'form': form})
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('index')  # redirect to home page or another page
+        else:
+            messages.error(request, 'Invalid username or password')
+
+    return render(request, 'genre/login.html')
 # using generic class
 class index(generic.ListView):
-    template_name = "genre\indextemplate.html"
+    template_name = "genre/indextemplate.html"
 
     def get_queryset(self):
         return Collection.objects.all()
@@ -87,6 +115,7 @@ def view_cart(request):
 #     }
 #     return render(request, "genre\detailtemplate.html",context)
 #
+
 def aboutus(request):
     return HttpResponse("<h1> About Us Page </h1>")
 

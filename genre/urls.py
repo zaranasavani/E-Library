@@ -5,8 +5,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('',views.index.as_view(),name="index"), 
-    # path('register/', views.register, name='register'),                                #this page open by default
-
+    path('register/', views.register, name='register'),                                #this page open by default
+    path('login/', views.login, name='login'),
+    
     #genre/aboutus
     path('aboutus/',views.aboutus,name="aboutus"),
 

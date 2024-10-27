@@ -27,3 +27,15 @@ class Piece(models.Model):
 
     def __str__(self):
         return self.title
+
+class UserProfile(models.Model):
+    username = models.CharField(max_length=100)
+    email = models.EmailField()
+    password = models.CharField(max_length=100)  # Store hashed passwords for security
+    gender = models.CharField(max_length=10)
+    country = models.CharField(max_length=50)
+    dob = models.DateField()
+    mobile = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.username
