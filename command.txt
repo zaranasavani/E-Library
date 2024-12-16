@@ -1,0 +1,24 @@
+1.  isolate app
+    pip install virtualenvwrapper-win
+2.  create virtual environment 
+    mkvirtualenv envname(e.g myenv)
+3.  install django framework
+    pip install django
+4.  start project
+    django-admin startproject projectname(e.g firstDjango)
+
+
+
+==> run the server 
+    python manage.py runserver
+
+
+==> create app
+    python manage.py startapp appname(e.g genre)
+
+
+after creating table in models.py file
+==> link database with soursecode
+    python manage.py migrate
+
+==> python manage.py makemigrations appname(e.g genre)
